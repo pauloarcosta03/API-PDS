@@ -3,6 +3,7 @@ using API_PDS.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PDS.Migrations
 {
     [DbContext(typeof(CondoSocialContext))]
-    partial class CondoSocialContextModelSnapshot : ModelSnapshot
+    [Migration("20250406174619_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,54 +61,6 @@ namespace API_PDS.Migrations
                     b.ToTable("Condominios");
                 });
 
-            modelBuilder.Entity("API_PDS.Model.ContactoEmergencia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CondominioId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Telemovel")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CondominioId");
-
-                    b.ToTable("ContactosEmergencia");
-                });
-
-            modelBuilder.Entity("API_PDS.Model.GestorCondominio", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CondominioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UtilizadorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CondominioId");
-
-                    b.HasIndex("UtilizadorId");
-
-                    b.ToTable("GestoresCondominio");
-                });
-
             modelBuilder.Entity("API_PDS.Model.Utilizador", b =>
                 {
                     b.Property<int>("Id")
@@ -115,9 +70,6 @@ namespace API_PDS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CondominioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GestorCondominioId")
                         .HasColumnType("int");
 
                     b.Property<int>("NPorta")
@@ -134,8 +86,6 @@ namespace API_PDS.Migrations
 
                     b.HasIndex("CondominioId");
 
-                    b.HasIndex("GestorCondominioId");
-
                     b.ToTable("Utilizadores");
                 });
 
@@ -150,36 +100,6 @@ namespace API_PDS.Migrations
                     b.Navigation("CodigoPostal");
                 });
 
-            modelBuilder.Entity("API_PDS.Model.ContactoEmergencia", b =>
-                {
-                    b.HasOne("API_PDS.Model.Condominio", "Condominio")
-                        .WithMany("ContactosEmergencia")
-                        .HasForeignKey("CondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Condominio");
-                });
-
-            modelBuilder.Entity("API_PDS.Model.GestorCondominio", b =>
-                {
-                    b.HasOne("API_PDS.Model.Condominio", "Condominio")
-                        .WithMany("GestoresCondominio")
-                        .HasForeignKey("CondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
-                        .WithMany()
-                        .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Condominio");
-
-                    b.Navigation("Utilizador");
-                });
-
             modelBuilder.Entity("API_PDS.Model.Utilizador", b =>
                 {
                     b.HasOne("API_PDS.Model.Condominio", "Condominio")
@@ -188,15 +108,7 @@ namespace API_PDS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
-                        .WithMany()
-                        .HasForeignKey("GestorCondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Condominio");
-
-                    b.Navigation("GestorCondominio");
                 });
 
             modelBuilder.Entity("API_PDS.Model.CodigoPostal", b =>
@@ -206,10 +118,6 @@ namespace API_PDS.Migrations
 
             modelBuilder.Entity("API_PDS.Model.Condominio", b =>
                 {
-                    b.Navigation("ContactosEmergencia");
-
-                    b.Navigation("GestoresCondominio");
-
                     b.Navigation("Utilizadores");
                 });
 #pragma warning restore 612, 618

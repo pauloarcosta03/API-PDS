@@ -15,5 +15,6 @@ namespace API_PDS.Model
         public ICollection<Utilizador> Utilizadores { get; set; }
         public ICollection<ContactoEmergencia> ContactosEmergencia { get; set; }
         public ICollection<GestorCondominio> GestoresCondominio { get; set; }
+        public ICollection<Incidencia> Incidencias { get; set; }
     }
 }

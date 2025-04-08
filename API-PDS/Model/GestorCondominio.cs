@@ -12,5 +12,9 @@ namespace API_PDS.Model
         [ForeignKey("Utilizador")]
         public int UtilizadorId { get; set; }
         public Utilizador Utilizador { get; set; }
+
+        public ICollection<Reuniao> Reunioes { get; set; }
+        public ICollection<Incidencia> Incidencias { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

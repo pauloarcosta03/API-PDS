@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PDS.Migrations
 {
     [DbContext(typeof(CondoSocialContext))]
-    [Migration("20250408161633_v1")]
+    [Migration("20250415102541_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -154,8 +154,6 @@ namespace API_PDS.Migrations
 
                     b.HasIndex("CondominioId");
 
-                    b.HasIndex("UtilizadorId");
-
                     b.ToTable("GestoresCondominio");
                 });
 
@@ -234,8 +232,6 @@ namespace API_PDS.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UtilizadorId");
 
                     b.ToTable("Login");
                 });
@@ -389,10 +385,10 @@ namespace API_PDS.Migrations
                     b.Property<int>("CondominioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GestorCondominioId")
+                    b.Property<int?>("GestorCondominioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LoginId")
+                    b.Property<int?>("LoginId")
                         .HasColumnType("int");
 
                     b.Property<int>("NPorta")
@@ -409,9 +405,13 @@ namespace API_PDS.Migrations
 
                     b.HasIndex("CondominioId");
 
-                    b.HasIndex("GestorCondominioId");
+                    b.HasIndex("GestorCondominioId")
+                        .IsUnique()
+                        .HasFilter("[GestorCondominioId] IS NOT NULL");
 
-                    b.HasIndex("LoginId");
+                    b.HasIndex("LoginId")
+                        .IsUnique()
+                        .HasFilter("[LoginId] IS NOT NULL");
 
                     b.ToTable("Utilizadores");
                 });
@@ -427,7 +427,7 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Comentarios")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
@@ -476,15 +476,7 @@ namespace API_PDS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
-                        .WithMany()
-                        .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Condominio");
-
-                    b.Navigation("Utilizador");
                 });
 
             modelBuilder.Entity("API_PDS.Model.Incidencia", b =>
@@ -498,13 +490,13 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
                         .WithMany("Incidencias")
                         .HasForeignKey("GestorCondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Incidencias")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Condominio");
@@ -525,21 +517,10 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Likes")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
-
-                    b.Navigation("Utilizador");
-                });
-
-            modelBuilder.Entity("API_PDS.Model.Login", b =>
-                {
-                    b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
-                        .WithMany()
-                        .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Utilizador");
                 });
@@ -555,19 +536,19 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.Post", "Post")
                         .WithMany("Notificacoes")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("API_PDS.Model.Reuniao", "Reuniao")
                         .WithMany("Notificacoes")
                         .HasForeignKey("ReuniaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Notificacoes")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Incidencia");
@@ -590,7 +571,7 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Participantes")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
@@ -609,7 +590,7 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Posts")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("GestorCondominio");
@@ -628,7 +609,7 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Reunioes")
                         .HasForeignKey("UtilizadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("GestorCondominio");
@@ -645,16 +626,14 @@ namespace API_PDS.Migrations
                         .IsRequired();
 
                     b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
-                        .WithMany()
-                        .HasForeignKey("GestorCondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne("Utilizador")
+                        .HasForeignKey("API_PDS.Model.Utilizador", "GestorCondominioId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("API_PDS.Model.Login", "Login")
-                        .WithMany()
-                        .HasForeignKey("LoginId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne("Utilizador")
+                        .HasForeignKey("API_PDS.Model.Utilizador", "LoginId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Condominio");
 
@@ -686,11 +665,20 @@ namespace API_PDS.Migrations
                     b.Navigation("Posts");
 
                     b.Navigation("Reunioes");
+
+                    b.Navigation("Utilizador")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API_PDS.Model.Incidencia", b =>
                 {
                     b.Navigation("Notificacoes");
+                });
+
+            modelBuilder.Entity("API_PDS.Model.Login", b =>
+                {
+                    b.Navigation("Utilizador")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API_PDS.Model.Post", b =>

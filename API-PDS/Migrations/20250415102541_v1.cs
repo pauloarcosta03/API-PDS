@@ -24,6 +24,20 @@ namespace API_PDS.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Login",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Login", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Condominios",
                 columns: table => new
                 {
@@ -65,35 +79,6 @@ namespace API_PDS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comentario",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Mensagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UtilizadorId = table.Column<int>(type: "int", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comentario", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contactos",
-                columns: table => new
-                {
-                    Descricao = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Tag = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contactos", x => x.Descricao);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GestoresCondominio",
                 columns: table => new
                 {
@@ -109,6 +94,60 @@ namespace API_PDS.Migrations
                         name: "FK_GestoresCondominio_Condominios_CondominioId",
                         column: x => x.CondominioId,
                         principalTable: "Condominios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Utilizadores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nif = table.Column<int>(type: "int", nullable: false),
+                    NPorta = table.Column<int>(type: "int", nullable: false),
+                    CondominioId = table.Column<int>(type: "int", nullable: false),
+                    GestorCondominioId = table.Column<int>(type: "int", nullable: true),
+                    LoginId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Utilizadores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Utilizadores_Condominios_CondominioId",
+                        column: x => x.CondominioId,
+                        principalTable: "Condominios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Utilizadores_GestoresCondominio_GestorCondominioId",
+                        column: x => x.GestorCondominioId,
+                        principalTable: "GestoresCondominio",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Utilizadores_Login_LoginId",
+                        column: x => x.LoginId,
+                        principalTable: "Login",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contactos",
+                columns: table => new
+                {
+                    Descricao = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tag = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contactos", x => x.Descricao);
+                    table.ForeignKey(
+                        name: "FK_Contactos_Utilizadores_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizadores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -138,72 +177,12 @@ namespace API_PDS.Migrations
                         name: "FK_Incidencias_GestoresCondominio_GestorCondominioId",
                         column: x => x.GestorCondominioId,
                         principalTable: "GestoresCondominio",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Like",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UtilizadorId = table.Column<int>(type: "int", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Like", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Login",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UtilizadorId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Login", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Utilizadores",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nif = table.Column<int>(type: "int", nullable: false),
-                    NPorta = table.Column<int>(type: "int", nullable: false),
-                    CondominioId = table.Column<int>(type: "int", nullable: false),
-                    GestorCondominioId = table.Column<int>(type: "int", nullable: false),
-                    LoginId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Utilizadores", x => x.Id);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Utilizadores_Condominios_CondominioId",
-                        column: x => x.CondominioId,
-                        principalTable: "Condominios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Utilizadores_GestoresCondominio_GestorCondominioId",
-                        column: x => x.GestorCondominioId,
-                        principalTable: "GestoresCondominio",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Utilizadores_Login_LoginId",
-                        column: x => x.LoginId,
-                        principalTable: "Login",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Incidencias_Utilizadores_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizadores",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -232,8 +211,7 @@ namespace API_PDS.Migrations
                         name: "FK_Post_Utilizadores_UtilizadorId",
                         column: x => x.UtilizadorId,
                         principalTable: "Utilizadores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -261,8 +239,58 @@ namespace API_PDS.Migrations
                         name: "FK_Reunioes_Utilizadores_UtilizadorId",
                         column: x => x.UtilizadorId,
                         principalTable: "Utilizadores",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comentario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Mensagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false),
+                    PostId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comentario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Utilizadores_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizadores",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Like",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UtilizadorId = table.Column<int>(type: "int", nullable: false),
+                    PostId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Like", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Like_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Like_Utilizadores_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "Utilizadores",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -288,8 +316,7 @@ namespace API_PDS.Migrations
                         name: "FK_Participante_Utilizadores_UtilizadorId",
                         column: x => x.UtilizadorId,
                         principalTable: "Utilizadores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -318,20 +345,17 @@ namespace API_PDS.Migrations
                         name: "FK_Notificacao_Post_PostId",
                         column: x => x.PostId,
                         principalTable: "Post",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Notificacao_Reunioes_ReuniaoId",
                         column: x => x.ReuniaoId,
                         principalTable: "Reunioes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Notificacao_Utilizadores_UtilizadorId",
                         column: x => x.UtilizadorId,
                         principalTable: "Utilizadores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -365,11 +389,6 @@ namespace API_PDS.Migrations
                 column: "CondominioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GestoresCondominio_UtilizadorId",
-                table: "GestoresCondominio",
-                column: "UtilizadorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Incidencias_CondominioId",
                 table: "Incidencias",
                 column: "CondominioId");
@@ -392,11 +411,6 @@ namespace API_PDS.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Like_UtilizadorId",
                 table: "Like",
-                column: "UtilizadorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Login_UtilizadorId",
-                table: "Login",
                 column: "UtilizadorId");
 
             migrationBuilder.CreateIndex(
@@ -457,89 +471,21 @@ namespace API_PDS.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Utilizadores_GestorCondominioId",
                 table: "Utilizadores",
-                column: "GestorCondominioId");
+                column: "GestorCondominioId",
+                unique: true,
+                filter: "[GestorCondominioId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Utilizadores_LoginId",
                 table: "Utilizadores",
-                column: "LoginId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Comentario_Post_PostId",
-                table: "Comentario",
-                column: "PostId",
-                principalTable: "Post",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Comentario_Utilizadores_UtilizadorId",
-                table: "Comentario",
-                column: "UtilizadorId",
-                principalTable: "Utilizadores",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Contactos_Utilizadores_UtilizadorId",
-                table: "Contactos",
-                column: "UtilizadorId",
-                principalTable: "Utilizadores",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_GestoresCondominio_Utilizadores_UtilizadorId",
-                table: "GestoresCondominio",
-                column: "UtilizadorId",
-                principalTable: "Utilizadores",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Incidencias_Utilizadores_UtilizadorId",
-                table: "Incidencias",
-                column: "UtilizadorId",
-                principalTable: "Utilizadores",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Like_Post_PostId",
-                table: "Like",
-                column: "PostId",
-                principalTable: "Post",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Like_Utilizadores_UtilizadorId",
-                table: "Like",
-                column: "UtilizadorId",
-                principalTable: "Utilizadores",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Login_Utilizadores_UtilizadorId",
-                table: "Login",
-                column: "UtilizadorId",
-                principalTable: "Utilizadores",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                column: "LoginId",
+                unique: true,
+                filter: "[LoginId] IS NOT NULL");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_GestoresCondominio_Utilizadores_UtilizadorId",
-                table: "GestoresCondominio");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Login_Utilizadores_UtilizadorId",
-                table: "Login");
-
             migrationBuilder.DropTable(
                 name: "Comentario");
 

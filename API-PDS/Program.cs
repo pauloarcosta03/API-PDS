@@ -1,7 +1,10 @@
 using API_PDS.Model;
+using API_PDS.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<UtilizadorService>();
 
 // Add services to the container.
 builder.Services.AddDbContext<CondoSocialContext>(options =>

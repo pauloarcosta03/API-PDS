@@ -15,11 +15,11 @@ namespace API_PDS.Model
         public Condominio Condominio { get; set; }
 
         [ForeignKey("GestorCondominio")]
-        public int GestorCondominioId { get; set; }
+        public int? GestorCondominioId { get; set; }
         public GestorCondominio GestorCondominio { get; set; }
 
         [ForeignKey("Login")]
-        public int LoginId { get; set; }
+        public int? LoginId { get; set; }
         public Login Login { get; set; }
 
         public ICollection<Contacto> Contactos { get; set; }
@@ -30,5 +30,6 @@ namespace API_PDS.Model
         public ICollection<Like> Likes { get; set; }
         public ICollection<Participante> Participantes { get; set; }
         public ICollection<Notificacao> Notificacoes { get; set; }
+
     }
 }

@@ -11,10 +11,13 @@ namespace API_PDS.Services
             _context = context;
         }
 
-        public void AdicionarUtilizador(Utilizador utilizador)
+        public void AdicionarUtilizador(Utilizador utilizador, string password)
         {
-
             _context.Utilizadores.Add(utilizador);
+            _context.SaveChanges();
+
+            Login login = new Login(password, utilizador.Id);
+            _context.Login.Add(login);
             _context.SaveChanges();
         }
 

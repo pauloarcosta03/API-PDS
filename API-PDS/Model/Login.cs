@@ -9,7 +9,12 @@ namespace API_PDS.Model
 
         [ForeignKey("Utilizador")]
         public int UtilizadorId { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public Utilizador? Utilizador { get; set; }
 
+        public Login(string Password, int UtilizadorId)
+        {
+            this.UtilizadorId = UtilizadorId;
+            this.Password = Password;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using API_PDS.Model;
 using API_PDS.Services;
+using API_PDS.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_PDS.Controllers
@@ -16,30 +17,18 @@ namespace API_PDS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string Nome, int Nif, int NPorta, int CondominioId, int GestorCondominioId, int LoginId)
+        public IActionResult Add(UtilizadorViewModel uvm, string password)
         {
-            Utilizador utilizador = new Utilizador(/*Id, Nome, Nif, NPorta, CondominioId, GestorCondominioId, LoginId*/);
-            //utilizador.Id = Id;
-            utilizador.Nome = Nome;
-            utilizador.Nif = Nif;
-            utilizador.NPorta = NPorta;
-            utilizador.CondominioId = CondominioId;
-            utilizador.GestorCondominioId = null;
-            if (GestorCondominioId != -1)
-            {
-                utilizador.GestorCondominioId = GestorCondominioId;
-            }
-            utilizador.LoginId = null;
-            if (LoginId != -1)
-            {
-                utilizador.LoginId = LoginId;
-            }
-            _utilizadorService.AdicionarUtilizador(utilizador);
+            Utilizador utilizador = new Utilizador(uvm.Nome, uvm.Nif, uvm.NPorta, uvm.CondominioId, uvm.GestorCondominioId, uvm.LoginId);
+            _utilizadorService.AdicionarUtilizador(utilizador, password);
+
+            //Login login = new Login(password, utilizador.Id);
+
             return Ok();
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             List<Utilizador> utilizadores = _utilizadorService.ObterTodos();
             return Ok(utilizadores);

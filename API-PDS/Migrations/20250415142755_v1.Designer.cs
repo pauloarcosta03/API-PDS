@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PDS.Migrations
 {
     [DbContext(typeof(CondoSocialContext))]
-    [Migration("20250415102541_v1")]
+    [Migration("20250415142755_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -677,8 +677,7 @@ namespace API_PDS.Migrations
 
             modelBuilder.Entity("API_PDS.Model.Login", b =>
                 {
-                    b.Navigation("Utilizador")
-                        .IsRequired();
+                    b.Navigation("Utilizador");
                 });
 
             modelBuilder.Entity("API_PDS.Model.Post", b =>

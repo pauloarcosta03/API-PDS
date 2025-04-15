@@ -674,8 +674,7 @@ namespace API_PDS.Migrations
 
             modelBuilder.Entity("API_PDS.Model.Login", b =>
                 {
-                    b.Navigation("Utilizador")
-                        .IsRequired();
+                    b.Navigation("Utilizador");
                 });
 
             modelBuilder.Entity("API_PDS.Model.Post", b =>

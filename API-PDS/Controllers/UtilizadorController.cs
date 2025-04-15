@@ -16,8 +16,8 @@ namespace API_PDS.Controllers
             _utilizadorService = utilizadorService;
         }
 
-        [HttpPost]
-        public IActionResult Add(UtilizadorViewModel uvm, string password)
+        [HttpPost("novo")]
+        public IActionResult Adicionar(UtilizadorViewModel uvm, string password)
         {
             Utilizador utilizador = new Utilizador(uvm.Nome, uvm.Nif, uvm.NPorta, uvm.CondominioId, uvm.GestorCondominioId, uvm.LoginId);
             _utilizadorService.AdicionarUtilizador(utilizador, password);
@@ -27,11 +27,18 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("todos")]
+        public IActionResult ObterTodos()
         {
             List<Utilizador> utilizadores = _utilizadorService.ObterTodos();
             return Ok(utilizadores);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult ObterPorId(int id)
+        {
+            Utilizador utilizador = _utilizadorService.ObterPorId(id);
+            return Ok(utilizador);
         }
     }
 }

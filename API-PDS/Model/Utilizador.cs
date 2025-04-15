@@ -31,6 +31,10 @@ namespace API_PDS.Model
         public ICollection<Participante>? Participantes { get; set; }
         public ICollection<Notificacao>? Notificacoes { get; set; }
 
+        public Utilizador()
+        {
+            
+        }
         public Utilizador(string Nome, int Nif, int NPorta, int CondominioId, int? GestorCondominioId, int? LoginId)
         {
             this.Nome = Nome;

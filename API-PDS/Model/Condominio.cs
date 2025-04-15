@@ -16,5 +16,11 @@ namespace API_PDS.Model
         public ICollection<ContactoEmergencia> ContactosEmergencia { get; set; }
         public ICollection<GestorCondominio> GestoresCondominio { get; set; }
         public ICollection<Incidencia> Incidencias { get; set; }
+
+        public Condominio(string Morada, string CP)
+        {
+            this.Morada = Morada;
+            this.CP = CP;
+        }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<UtilizadorService>();
+builder.Services.AddScoped<CondominioService>();
 
 // Add services to the container.
 builder.Services.AddDbContext<CondoSocialContext>(options =>

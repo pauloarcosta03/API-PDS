@@ -88,11 +88,8 @@ namespace API_PDS.Migrations
 
             modelBuilder.Entity("API_PDS.Model.Contacto", b =>
                 {
-                    b.Property<int>("Descricao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Descricao"));
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Tag")
                         .IsRequired()

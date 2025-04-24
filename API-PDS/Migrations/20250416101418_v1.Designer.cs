@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PDS.Migrations
 {
     [DbContext(typeof(CondoSocialContext))]
-    [Migration("20250415142755_v1")]
+    [Migration("20250416101418_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -91,11 +91,8 @@ namespace API_PDS.Migrations
 
             modelBuilder.Entity("API_PDS.Model.Contacto", b =>
                 {
-                    b.Property<int>("Descricao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Descricao"));
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Tag")
                         .IsRequired()

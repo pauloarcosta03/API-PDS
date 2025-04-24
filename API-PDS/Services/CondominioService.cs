@@ -1,24 +1,29 @@
 ﻿using API_PDS.Model;
+using API_PDS.ViewModel;
 
 namespace API_PDS.Services
 {
     public class CondominioService
     {
         private readonly CondoSocialContext _context;
+        private readonly UtilizadorService _utilizadorService;
 
-        public CondominioService(CondoSocialContext context)
+        public CondominioService(CondoSocialContext context, UtilizadorService utilizadorService)
         {
             _context = context;
+            _utilizadorService = utilizadorService;
         }
 
         /// <summary>
         /// Adiciona um novo condominio à DB
         /// </summary>
         /// <param name="condominio"></param>
-        public void AdicionarCondominio(Condominio condominio)
+        public void AdicionarCondominio(Condominio condominio, NovoCondominioViewModel uvm)
         {
             _context.Condominios.Add(condominio);
             _context.SaveChanges();
+            uvm.CondominioId = condominio.Id;
+            _utilizadorService.AdicionarUtilizador(uvm);
         }
 
         /// <summary>
@@ -28,7 +33,7 @@ namespace API_PDS.Services
         /// <returns></returns>
         public bool existeCP(string cp)
         {
-            return _context.Condominios.Any(con => con.CP == cp);
+            return _context.CodigoPostal.Any(con => con.CP == cp);
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace API_PDS.Controllers
         }
 
         [HttpPost("novo")]
-        public IActionResult Adicionar(CondominioViewModel cvm)
+        public IActionResult Adicionar(NovoCondominioViewModel cvm)
         {
             //Verifica se já existe Codigo Postal
             bool existeCP = _condominioService.existeCP(cvm.CP);
@@ -27,7 +27,7 @@ namespace API_PDS.Controllers
             }
 
             Condominio condominio = new Condominio(cvm.Morada, cvm.CP);
-            _condominioService.AdicionarCondominio(condominio);
+            _condominioService.AdicionarCondominio(condominio, cvm);
 
             return Ok();
         }

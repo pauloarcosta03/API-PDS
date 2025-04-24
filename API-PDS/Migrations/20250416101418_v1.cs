@@ -136,8 +136,7 @@ namespace API_PDS.Migrations
                 name: "Contactos",
                 columns: table => new
                 {
-                    Descricao = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Tag = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UtilizadorId = table.Column<int>(type: "int", nullable: false)
                 },

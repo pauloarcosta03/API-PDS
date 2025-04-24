@@ -1,4 +1,5 @@
 ﻿using API_PDS.Model;
+using API_PDS.ViewModel;
 
 namespace API_PDS.Services
 {
@@ -11,13 +12,37 @@ namespace API_PDS.Services
             _context = context;
         }
 
-        public void AdicionarUtilizador(Utilizador utilizador, string password)
+        public void AdicionarUtilizador(NovoUtilizadorViewModel uvm)
         {
+            //Cria o utilizador
+            Utilizador utilizador = new Utilizador(uvm.Nome, uvm.Nif, uvm.NPorta, uvm.CondominioId, uvm.GestorCondominioId, uvm.LoginId);
             _context.Utilizadores.Add(utilizador);
             _context.SaveChanges();
 
-            Login login = new Login(password, utilizador.Id);
+            //adiciona os dados de login
+            Login login = new Login(uvm.Password, utilizador.Id);
             _context.Login.Add(login);
+            _context.SaveChanges();
+
+            Contacto contacto = new Contacto(uvm.contacto, uvm.contactoTag, utilizador.Id);
+            _context.Contactos.Add(contacto);
+            _context.SaveChanges();
+        }
+
+        public void AdicionarUtilizador(NovoCondominioViewModel uvm)
+        {
+            //Cria o utilizador
+            Utilizador utilizador = new Utilizador(uvm.Nome, uvm.Nif, uvm.NPorta, uvm.CondominioId, uvm.GestorCondominioId, uvm.LoginId);
+            _context.Utilizadores.Add(utilizador);
+            _context.SaveChanges();
+
+            //adiciona os dados de login
+            Login login = new Login(uvm.Password, utilizador.Id);
+            _context.Login.Add(login);
+            _context.SaveChanges();
+
+            Contacto contacto = new Contacto(uvm.contacto, uvm.contactoTag, utilizador.Id);
+            _context.Contactos.Add(contacto);
             _context.SaveChanges();
         }
 

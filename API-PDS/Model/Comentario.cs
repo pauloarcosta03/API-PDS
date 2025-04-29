@@ -6,6 +6,7 @@ namespace API_PDS.Model
     {
         public int Id { get; set; }
         public string Mensagem { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         [ForeignKey("Utilizador")]
         public int UtilizadorId { get; set; }

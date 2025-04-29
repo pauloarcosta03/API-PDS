@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<UtilizadorService>();
+builder.Services.AddScoped<ContactoService>();
+builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<CondominioService>();
 
 // Add services to the container.

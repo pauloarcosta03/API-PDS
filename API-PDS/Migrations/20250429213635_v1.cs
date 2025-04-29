@@ -194,6 +194,7 @@ namespace API_PDS.Migrations
                     Mensagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tag = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Aceite = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UtilizadorId = table.Column<int>(type: "int", nullable: false),
                     GestorCondominioId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -248,6 +249,7 @@ namespace API_PDS.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Mensagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UtilizadorId = table.Column<int>(type: "int", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false)
                 },

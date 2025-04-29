@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PDS.Migrations
 {
     [DbContext(typeof(CondoSocialContext))]
-    [Migration("20250416101418_v1")]
+    [Migration("20250429213635_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -46,6 +46,9 @@ namespace API_PDS.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Mensagem")
                         .IsRequired()
@@ -309,6 +312,9 @@ namespace API_PDS.Migrations
 
                     b.Property<bool>("Aceite")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GestorCondominioId")
                         .HasColumnType("int");

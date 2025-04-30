@@ -11,7 +11,7 @@ namespace API_PDS.Model
         public int NPorta { get; set; }
 
         [ForeignKey("Condominio")]
-        public int CondominioId { get; set; }
+        public int? CondominioId { get; set; }
         public Condominio? Condominio { get; set; }
 
         [ForeignKey("GestorCondominio")]

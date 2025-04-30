@@ -1,5 +1,6 @@
 ﻿using API_PDS.Model;
 using API_PDS.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_PDS.Services
 {
@@ -24,6 +25,9 @@ namespace API_PDS.Services
             _context.Login.Add(login);
             _context.SaveChanges();
 
+            utilizador.LoginId = login.Id;
+            _context.SaveChanges();
+
             Contacto contacto = new Contacto(uvm.contacto, uvm.contactoTag, utilizador.Id);
             _context.Contactos.Add(contacto);
             _context.SaveChanges();
@@ -41,6 +45,9 @@ namespace API_PDS.Services
             _context.Login.Add(login);
             _context.SaveChanges();
 
+            utilizador.LoginId = login.Id;
+            _context.SaveChanges();
+
             Contacto contacto = new Contacto(uvm.contacto, uvm.contactoTag, utilizador.Id);
             _context.Contactos.Add(contacto);
             _context.SaveChanges();
@@ -50,7 +57,11 @@ namespace API_PDS.Services
 
         public List<Utilizador> ObterTodos()
         {
-            return _context.Utilizadores.ToList();
+            return _context.Utilizadores
+                //.Include(u => u.Condominio)
+                //.Include(u => u.GestorCondominio)
+                //.Include(u => u.Login)
+                .ToList();
         }
 
         public Utilizador ObterPorId(int id)

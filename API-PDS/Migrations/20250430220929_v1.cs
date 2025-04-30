@@ -107,7 +107,7 @@ namespace API_PDS.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nif = table.Column<int>(type: "int", nullable: false),
                     NPorta = table.Column<int>(type: "int", nullable: false),
-                    CondominioId = table.Column<int>(type: "int", nullable: false),
+                    CondominioId = table.Column<int>(type: "int", nullable: true),
                     GestorCondominioId = table.Column<int>(type: "int", nullable: true),
                     LoginId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -118,8 +118,7 @@ namespace API_PDS.Migrations
                         name: "FK_Utilizadores_Condominios_CondominioId",
                         column: x => x.CondominioId,
                         principalTable: "Condominios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Utilizadores_GestoresCondominio_GestorCondominioId",
                         column: x => x.GestorCondominioId,
@@ -196,7 +195,7 @@ namespace API_PDS.Migrations
                     Aceite = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UtilizadorId = table.Column<int>(type: "int", nullable: false),
-                    GestorCondominioId = table.Column<int>(type: "int", nullable: false)
+                    GestorCondominioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,8 +204,7 @@ namespace API_PDS.Migrations
                         name: "FK_Post_GestoresCondominio_GestorCondominioId",
                         column: x => x.GestorCondominioId,
                         principalTable: "GestoresCondominio",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Post_Utilizadores_UtilizadorId",
                         column: x => x.UtilizadorId,

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PDS.Migrations
 {
     [DbContext(typeof(CondoSocialContext))]
-    [Migration("20250429213635_v1")]
+    [Migration("20250430220929_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -316,7 +316,7 @@ namespace API_PDS.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GestorCondominioId")
+                    b.Property<int?>("GestorCondominioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Mensagem")
@@ -385,7 +385,7 @@ namespace API_PDS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CondominioId")
+                    b.Property<int?>("CondominioId")
                         .HasColumnType("int");
 
                     b.Property<int?>("GestorCondominioId")
@@ -586,9 +586,7 @@ namespace API_PDS.Migrations
                 {
                     b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
                         .WithMany("Posts")
-                        .HasForeignKey("GestorCondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GestorCondominioId");
 
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Posts")
@@ -624,9 +622,7 @@ namespace API_PDS.Migrations
                 {
                     b.HasOne("API_PDS.Model.Condominio", "Condominio")
                         .WithMany("Utilizadores")
-                        .HasForeignKey("CondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CondominioId");
 
                     b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
                         .WithOne("Utilizador")

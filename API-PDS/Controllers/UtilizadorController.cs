@@ -27,6 +27,14 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        [HttpPost("editar")]
+        public IActionResult Editar(Utilizador u)
+        {
+            _utilizadorService.EditarPerfil(u);
+
+            return Ok();
+        }
+
         [HttpGet("todos")]
         public IActionResult ObterTodos()
         {

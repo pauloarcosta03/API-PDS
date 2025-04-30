@@ -55,6 +55,15 @@ namespace API_PDS.Services
             return utilizador.Id;
         }
 
+        public void EditarPerfil(Utilizador utilizador)
+        {
+            Utilizador utilizadorDb = _context.Utilizadores.FirstOrDefault(u => u.Id == utilizador.Id);
+            utilizadorDb.Nome = utilizador.Nome;
+            utilizadorDb.Nif = utilizador.Nif;
+            utilizadorDb.NPorta = utilizador.NPorta;
+            _context.SaveChanges();
+        }
+
         public List<Utilizador> ObterTodos()
         {
             return _context.Utilizadores

@@ -15,6 +15,11 @@ namespace API_PDS.Controllers
             _postService = postService;
         }
 
+        /// <summary>
+        /// Cria novo post
+        /// </summary>
+        /// <param name="pvm"></param>
+        /// <returns></returns>
         [HttpPost("novo")]
         public IActionResult Adicionar(PostViewModel pvm)
         {
@@ -25,10 +30,24 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
-        [HttpGet("lista")]
-        public IActionResult ObterCondominioId()
+        /// <summary>
+        /// Busca todos os posts do mais novo para o antigo
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("feed")]
+        public IActionResult ObterPostsFeed()
         {
             return Ok(_postService.ObtemPosts());
+        }
+
+        /// <summary>
+        /// Busca todos os posts do mais novo para o antigo
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("lista/admin")]
+        public IActionResult ObterPostsNaoAprovados()
+        {
+            return Ok(_postService.ObtemPostsAdmin());
         }
     }
 }

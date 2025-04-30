@@ -16,5 +16,16 @@ namespace API_PDS.Model
         public ICollection<Reuniao> Reunioes { get; set; }
         public ICollection<Incidencia> Incidencias { get; set; }
         public ICollection<Post> Posts { get; set; }
+
+        public GestorCondominio()
+        {
+            
+        }
+
+        public GestorCondominio(int CondominioId, int UtilizadorId)
+        {
+            this.CondominioId = CondominioId;
+            this.UtilizadorId = UtilizadorId;
+        }
     }
 }

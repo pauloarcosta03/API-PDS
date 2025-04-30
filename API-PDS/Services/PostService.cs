@@ -24,5 +24,9 @@ namespace API_PDS.Services
             return(_context.Post.OrderByDescending(p => p.CreatedOn).ToList());
         }
 
+        public List<Post> ObtemPostsAdmin() {
+            return(_context.Post.OrderByDescending(p => p.CreatedOn).Where(p => p.Aceite == false).ToList());
+        }
+
     }
 }

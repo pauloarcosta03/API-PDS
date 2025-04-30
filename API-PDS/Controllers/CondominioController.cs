@@ -15,6 +15,11 @@ namespace API_PDS.Controllers
             _condominioService = condominioService;
         }
 
+        /// <summary>
+        /// Cria um condominio novo e um utilizador que vai ser o primeiro gestor
+        /// </summary>
+        /// <param name="cvm"></param>
+        /// <returns></returns>
         [HttpPost("novo")]
         public IActionResult Adicionar(NovoCondominioViewModel cvm)
         {
@@ -32,12 +37,21 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Procura Condominio por ID
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpGet("{Id}")]
         public IActionResult ObterCondominioId(int Id)
         {
             return Ok(_condominioService.ObtemCondominioId(Id));
         }
 
+        /// <summary>
+        /// Lista todos os condominios
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Todos")]
         public IActionResult ObterCondominios()
         {

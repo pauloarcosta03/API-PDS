@@ -29,7 +29,7 @@ namespace API_PDS.Services
             _context.SaveChanges();
         }
 
-        public void AdicionarUtilizador(NovoCondominioViewModel uvm)
+        public int AdicionarUtilizador(NovoCondominioViewModel uvm)
         {
             //Cria o utilizador
             Utilizador utilizador = new Utilizador(uvm.Nome, uvm.Nif, uvm.NPorta, uvm.CondominioId, uvm.GestorCondominioId, uvm.LoginId);
@@ -44,6 +44,8 @@ namespace API_PDS.Services
             Contacto contacto = new Contacto(uvm.contacto, uvm.contactoTag, utilizador.Id);
             _context.Contactos.Add(contacto);
             _context.SaveChanges();
+
+            return utilizador.Id;
         }
 
         public List<Utilizador> ObterTodos()

@@ -23,7 +23,10 @@ namespace API_PDS.Services
             _context.Condominios.Add(condominio);
             _context.SaveChanges();
             uvm.CondominioId = condominio.Id;
-            _utilizadorService.AdicionarUtilizador(uvm);
+            int utilizadorId = _utilizadorService.AdicionarUtilizador(uvm);
+
+            GestorCondominio g = new GestorCondominio(condominio.Id, utilizadorId);
+            PromoverUser(g);
         }
 
         /// <summary>
@@ -61,6 +64,16 @@ namespace API_PDS.Services
         public List<Condominio> ObtemTodosCondominios()
         {
             return _context.Condominios.ToList();
+        }
+
+        public void PromoverUser(GestorCondominio g)
+        {
+            _context.GestoresCondominio.Add(g);
+            _context.SaveChanges();
+
+            Utilizador utilizador = _context.Utilizadores.FirstOrDefault(u => u.Id == g.UtilizadorId);
+            utilizador.GestorCondominioId = g.Id;
+            _context.SaveChanges();
         }
     }
 }

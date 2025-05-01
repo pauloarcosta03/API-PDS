@@ -7,7 +7,6 @@ namespace API_PDS.Services
     public class LoginService
     {
         private readonly CondoSocialContext _context;
-        private readonly UtilizadorService _utilizadorService;
 
         public LoginService(CondoSocialContext context)
         {

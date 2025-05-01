@@ -11,5 +11,17 @@ namespace API_PDS.Model
         [ForeignKey("Condominio")]
         public int CondominioId { get; set; }
         public Condominio Condominio { get; set; }
+
+        public ContactoEmergencia()
+        {
+            
+        }
+
+        public ContactoEmergencia(string Nome, int Telemovel, int CondominioId)
+        {
+            this.Nome = Nome;
+            this.Telemovel = Telemovel;
+            this.CondominioId = CondominioId;
+        }
     }
 }

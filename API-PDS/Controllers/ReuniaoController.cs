@@ -1,4 +1,5 @@
 ﻿using API_PDS.Services;
+using API_PDS.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_PDS.Controllers
@@ -13,6 +14,34 @@ namespace API_PDS.Controllers
             _reuniaoService = reuniaoService;
         }
 
+        [HttpPost("novo/pedido")]
+        public IActionResult AdicionarPedido(PedidoReuniaoViewModel prvm)
+        {
+            _reuniaoService.NovoPedidoReuniao(prvm);
 
+            return Ok();
+        }
+
+        [HttpPost("editar/pedido")]
+        public IActionResult EditarPedido(ReuniaoViewModel rvm)
+        {
+            _reuniaoService.EditaPedidoReuniao(rvm);
+
+            return Ok();
+        }
+
+        [HttpGet("lista/admin")]
+        public IActionResult ListaReunioesAdmin()
+        {
+
+            return Ok(_reuniaoService.ListaReunioesAdmin());
+        }
+
+        [HttpGet("lista/prox")]
+        public IActionResult ListaReunioesFuturas()
+        {
+
+            return Ok(_reuniaoService.ListaReunioesFuturas());
+        }
     }
 }

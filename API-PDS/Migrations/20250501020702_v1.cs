@@ -219,11 +219,11 @@ namespace API_PDS.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Horario = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Horario = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ata = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ata = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UtilizadorId = table.Column<int>(type: "int", nullable: false),
-                    GestorCondominioId = table.Column<int>(type: "int", nullable: false)
+                    GestorCondominioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,8 +232,7 @@ namespace API_PDS.Migrations
                         name: "FK_Reunioes_GestoresCondominio_GestorCondominioId",
                         column: x => x.GestorCondominioId,
                         principalTable: "GestoresCondominio",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Reunioes_Utilizadores_UtilizadorId",
                         column: x => x.UtilizadorId,

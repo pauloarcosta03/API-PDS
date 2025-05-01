@@ -351,17 +351,16 @@ namespace API_PDS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Ata")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GestorCondominioId")
+                    b.Property<int?>("GestorCondominioId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Horario")
+                    b.Property<DateTime?>("Horario")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UtilizadorId")
@@ -601,9 +600,7 @@ namespace API_PDS.Migrations
                 {
                     b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
                         .WithMany("Reunioes")
-                        .HasForeignKey("GestorCondominioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GestorCondominioId");
 
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Reunioes")

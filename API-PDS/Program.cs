@@ -11,6 +11,7 @@ builder.Services.AddScoped<CondominioService>();
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<ContactoEmergenciaService>();
 builder.Services.AddScoped<IncidenciaService>();
+builder.Services.AddScoped<ReuniaoService>();
 
 // Add services to the container.
 builder.Services.AddDbContext<CondoSocialContext>(options =>

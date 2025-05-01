@@ -165,7 +165,7 @@ namespace API_PDS.Migrations
                     b.Property<int>("CondominioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GestorCondominioId")
+                    b.Property<int?>("GestorCondominioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Mensagem")
@@ -173,7 +173,6 @@ namespace API_PDS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Resposta")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UtilizadorId")
@@ -319,6 +318,9 @@ namespace API_PDS.Migrations
                     b.Property<string>("Mensagem")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumLikes")
+                        .HasColumnType("int");
 
                     b.Property<string>("Tag")
                         .IsRequired()
@@ -490,8 +492,7 @@ namespace API_PDS.Migrations
                     b.HasOne("API_PDS.Model.GestorCondominio", "GestorCondominio")
                         .WithMany("Incidencias")
                         .HasForeignKey("GestorCondominioId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("API_PDS.Model.Utilizador", "Utilizador")
                         .WithMany("Incidencias")

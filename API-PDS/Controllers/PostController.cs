@@ -30,6 +30,21 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        [HttpPost("like/{utilizadorId}/{postId}")]
+        public IActionResult Like(int utilizadorId, int postId)
+        {
+            if (!_postService.TemLike(utilizadorId, postId)) 
+                _postService.AddLike(utilizadorId, postId);
+            return Ok();
+        }
+
+        [HttpPost("comentar/{utilizadorId}/{postId}")]
+        public IActionResult Comentar(int utilizadorId, int postId, string comentario)
+        {
+            _postService.AddComentario(utilizadorId, postId, comentario);
+            return Ok();
+        }
+
         /// <summary>
         /// Busca todos os posts do mais novo para o antigo
         /// </summary>
@@ -48,6 +63,12 @@ namespace API_PDS.Controllers
         public IActionResult ObterPostsNaoAprovados()
         {
             return Ok(_postService.ObtemPostsAdmin());
+        }
+        
+        [HttpGet("comentarios/{id}")]
+        public IActionResult ObterComentarios(int id)
+        {
+            return Ok(_postService.BuscaComentarios(id));
         }
     }
 }

@@ -13,5 +13,16 @@ namespace API_PDS.Model
         [ForeignKey("Post")]
         public int PostId { get; set; }
         public Post Post { get; set; }
+
+        public Like()
+        {
+            
+        }
+
+        public Like(int utilizadorId, int postId)
+        {
+            this.UtilizadorId = utilizadorId;
+            this.PostId = postId;
+        }
     }
 }

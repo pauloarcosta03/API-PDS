@@ -15,5 +15,17 @@ namespace API_PDS.Model
         [ForeignKey("Post")]
         public int PostId { get; set; }
         public Post Post { get; set; }
+
+
+        public Comentario()
+        {
+            
+        }
+        public Comentario(int utilizadorId, int postId, string comentario)
+        {
+            this.UtilizadorId = utilizadorId;
+            this.PostId = postId;
+            this.Mensagem = comentario;
+        }
     }
 }

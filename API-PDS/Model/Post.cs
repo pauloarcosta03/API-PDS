@@ -8,6 +8,7 @@ namespace API_PDS.Model
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string Mensagem { get; set; }
+        public string Foto { get; set; }
         public int NumLikes { get; set; }
         public string Tag { get; set; }
         public bool Aceite { get; set; }

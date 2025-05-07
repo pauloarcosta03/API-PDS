@@ -17,7 +17,7 @@ namespace API_PDS.Controllers
         }
 
         [HttpPost("novo")]
-        public IActionResult Adicionar(NovoUtilizadorViewModel uvm, string password)
+        public IActionResult Adicionar(NovoUtilizadorViewModel uvm)
         {
             //Utilizador utilizador = new Utilizador(uvm.Nome, uvm.Nif, uvm.NPorta, uvm.CondominioId, uvm.GestorCondominioId, uvm.LoginId);
             _utilizadorService.AdicionarUtilizador(uvm);

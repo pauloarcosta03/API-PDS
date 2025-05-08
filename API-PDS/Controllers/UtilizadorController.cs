@@ -35,10 +35,10 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
-        [HttpGet("todos")]
-        public IActionResult ObterTodos()
+        [HttpGet("todos/{id}")]
+        public IActionResult ObterTodos(int id)
         {
-            List<Utilizador> utilizadores = _utilizadorService.ObterTodos();
+            List<Utilizador> utilizadores = _utilizadorService.ObterTodos(id);
             return Ok(utilizadores);
         }
 

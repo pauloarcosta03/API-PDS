@@ -64,9 +64,10 @@ namespace API_PDS.Services
             _context.SaveChanges();
         }
 
-        public List<Utilizador> ObterTodos()
+        public List<Utilizador> ObterTodos(int id)
         {
             return _context.Utilizadores
+                .Where(u=>u.CondominioId == id)
                 //.Include(u => u.Condominio)
                 //.Include(u => u.GestorCondominio)
                 //.Include(u => u.Login)

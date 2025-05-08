@@ -13,16 +13,25 @@ namespace API_PDS.Services
             _context = context;
         }
 
-        public int Login(LoginViewModel lvm)
+        public ResLoginViewModel Login(LoginViewModel lvm)
         {
             Contacto c = _context.Contactos.Include(u => u.Utilizador).ThenInclude(u=>u.Login).FirstOrDefault(c => c.Descricao == lvm.email);
 
-            if (c == null) return -1;
+            if (c == null) return null;
 
             if (c.Utilizador.Login.Password == lvm.Password)
-                return c.Utilizador.Id;
+            {
+                ResLoginViewModel rlvm = new ResLoginViewModel();
+
+                rlvm.IdUser = c.Utilizador.Id;
+                rlvm.User = c.Utilizador.Nome;
+                rlvm.Admin = _context.GestoresCondominio.Any(g => g.UtilizadorId == rlvm.IdUser);//bool
+
+                return rlvm;
+            }
+                
             else 
-                return -1;
+                return null;
         }
 
     }

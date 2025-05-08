@@ -36,6 +36,7 @@ namespace API_PDS.Model
         {
             this.Titulo = pvm.Titulo;
             this.Mensagem = pvm.Mensagem;
+            this.Foto = pvm.Foto;
             this.Tag = pvm.Tag;
             this.CreatedOn = pvm.CreatedOn;
             this.UtilizadorId = pvm.UtilizadorId;

@@ -16,22 +16,19 @@ namespace API_PDS.Services
         public ResLoginViewModel Login(LoginViewModel lvm)
         {
             Contacto c = _context.Contactos.Include(u => u.Utilizador).ThenInclude(u=>u.Login).FirstOrDefault(c => c.Descricao == lvm.email);
+            ResLoginViewModel rlvm = new ResLoginViewModel();
 
-            if (c == null) return null;
+            if (c == null) return rlvm;
 
             if (c.Utilizador.Login.Password == lvm.Password)
             {
-                ResLoginViewModel rlvm = new ResLoginViewModel();
-
                 rlvm.IdUser = c.Utilizador.Id;
                 rlvm.User = c.Utilizador.Nome;
                 rlvm.Admin = _context.GestoresCondominio.Any(g => g.UtilizadorId == rlvm.IdUser);//bool
 
-                return rlvm;
             }
                 
-            else 
-                return null;
+            return rlvm;
         }
 
     }

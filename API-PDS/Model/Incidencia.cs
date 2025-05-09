@@ -5,6 +5,8 @@ namespace API_PDS.Model
     public class Incidencia
     {
         public int Id { get; set; }
+        public string Tag { get; set; }
+        public string? Foto { get; set; }
         public string Mensagem { get; set; }
         public string? Resposta { get; set; }
 
@@ -27,11 +29,13 @@ namespace API_PDS.Model
             
         }
 
-        public Incidencia(string Mensagem, int UtilizadorId, int CondominioId)
+        public Incidencia(string Mensagem, int UtilizadorId, int CondominioId, string? foto, string tag)
         {
             this.UtilizadorId = UtilizadorId;
             this.CondominioId = CondominioId;
             this.Mensagem = Mensagem;
+            this.Foto = foto;
+            this.Tag = tag;
         }
     }
 }

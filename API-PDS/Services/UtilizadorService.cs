@@ -56,12 +56,13 @@ namespace API_PDS.Services
             return utilizador.Id;
         }
 
-        public void EditarPerfil(Utilizador utilizador)
+        public void EditarPerfil(EditarUserViewModel euvm)
         {
-            Utilizador utilizadorDb = _context.Utilizadores.FirstOrDefault(u => u.Id == utilizador.Id);
-            utilizadorDb.Nome = utilizador.Nome;
-            utilizadorDb.Nif = utilizador.Nif;
-            utilizadorDb.NPorta = utilizador.NPorta;
+            Utilizador utilizadorDb = _context.Utilizadores.FirstOrDefault(u => u.Id == euvm.Id);
+            utilizadorDb.Nome = euvm.Nome;
+            utilizadorDb.Nif = euvm.Nif;
+            utilizadorDb.NPorta = euvm.NPorta;
+            utilizadorDb.Foto = euvm.Foto;
             _context.SaveChanges();
         }
 

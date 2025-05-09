@@ -28,9 +28,9 @@ namespace API_PDS.Controllers
         }
 
         [HttpPost("editar")]
-        public IActionResult Editar(Utilizador u)
+        public IActionResult Editar(EditarUserViewModel euvm)
         {
-            _utilizadorService.EditarPerfil(u);
+            _utilizadorService.EditarPerfil(euvm);
 
             return Ok();
         }

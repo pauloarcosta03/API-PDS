@@ -14,7 +14,8 @@ namespace API_PDS.Services
 
         public void AddIncidencia(IncidenciaViewModel ivm)
         {
-            Incidencia incidencia = new Incidencia(ivm.Mensagem, ivm.UtilizadorId, ivm.CondominioId);
+            Utilizador utilizador = _context.Utilizadores.FirstOrDefault(u => u.Id == ivm.UtilizadorId);
+            Incidencia incidencia = new Incidencia(ivm.Mensagem, ivm.UtilizadorId, utilizador.CondominioId, ivm.Foto, ivm.Tag);
             _context.Incidencias.Add(incidencia);
             _context.SaveChanges();
         }

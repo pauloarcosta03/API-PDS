@@ -29,6 +29,13 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        [HttpPost("Eliminar/{id}")]
+        public IActionResult EliminaContacto(int id)
+        {
+            _contactoEmergenciaService.EliminaContactoEmergencia(id);
+            return Ok();
+        }
+
         [HttpGet("{contactoId}")]
         public IActionResult BuscaContacto(int contactoId)
         {

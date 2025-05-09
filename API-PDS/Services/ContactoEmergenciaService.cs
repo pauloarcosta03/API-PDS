@@ -29,6 +29,15 @@ namespace API_PDS.Services
             _context.SaveChanges();
         }
 
+        public void EliminaContactoEmergencia(int id)
+        {
+            ContactoEmergencia contactoEmergencia = _context.ContactosEmergencia.FirstOrDefault(c => c.Id == id);
+
+            _context.ContactosEmergencia.Remove(contactoEmergencia);
+
+            _context.SaveChanges();
+        }
+
         public ContactoEmergencia BuscaContacto(int contactoId)
         {
             return _context.ContactosEmergencia.FirstOrDefault(ce => ce.Id == contactoId);

@@ -29,12 +29,12 @@ namespace API_PDS.Services
             _context.SaveChanges();
         }
 
-        public List<Incidencia> ListaIncidencias() {
-            return _context.Incidencias.ToList();
+        public List<Incidencia> ListaIncidencias(int condominioId) {
+            return _context.Incidencias.Where(i => i.CondominioId == condominioId).ToList();
         }
 
-        public List<Incidencia> ListaIncidenciasSemResposta() {
-            return _context.Incidencias.Where(i => i.Resposta == null).ToList();
+        public List<Incidencia> ListaIncidenciasSemResposta(int condominioId) {
+            return _context.Incidencias.Where(i => i.Resposta == null && i.CondominioId == condominioId).ToList();
         }
 
         public Incidencia IncidenciaId(int id) {

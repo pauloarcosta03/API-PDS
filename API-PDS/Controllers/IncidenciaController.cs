@@ -30,18 +30,18 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
-        [HttpGet("lista/admin")]
-        public IActionResult ListaIncidenciasSemResposta()
+        [HttpGet("lista/admin/{condominioId}")]
+        public IActionResult ListaIncidenciasSemResposta(int condominioId)
         {
 
-            return Ok(_incidenciaService.ListaIncidenciasSemResposta());
+            return Ok(_incidenciaService.ListaIncidenciasSemResposta(condominioId));
         }
 
-        [HttpGet("lista")]
-        public IActionResult ListaIncidencias()
+        [HttpGet("lista/{condominioId}")]
+        public IActionResult ListaIncidencias(int condominioId)
         {
 
-            return Ok(_incidenciaService.ListaIncidencias());
+            return Ok(_incidenciaService.ListaIncidencias(condominioId));
         }
 
     }

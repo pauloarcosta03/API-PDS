@@ -7,6 +7,7 @@ namespace API_PDS.Model
         public int Id { get; set; }
         public DateTime? Horario { get; set; }
         public string Estado { get; set; }
+        public string Motivo { get; set; }
         public string? Ata { get; set; }
 
         [ForeignKey("Utilizador")]
@@ -24,10 +25,11 @@ namespace API_PDS.Model
             
         }
 
-        public Reuniao(DateTime? Horario, string Estado, int UtilizadorId, int? GestorCondominioId)
+        public Reuniao(DateTime? Horario, string Estado, string Motivo, int UtilizadorId, int? GestorCondominioId)
         {
             this.Horario = Horario;
             this.Estado = Estado;
+            this.Motivo = Motivo;
             this.UtilizadorId = UtilizadorId;
             this.GestorCondominioId = GestorCondominioId;
         }

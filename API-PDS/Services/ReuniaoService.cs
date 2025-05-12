@@ -1,5 +1,6 @@
 ﻿using API_PDS.Model;
 using API_PDS.ViewModel;
+using System.Globalization;
 
 namespace API_PDS.Services
 {
@@ -14,7 +15,9 @@ namespace API_PDS.Services
 
         public void NovoPedidoReuniao(PedidoReuniaoViewModel prvm)
         {
-            Reuniao reuniao = new Reuniao(prvm.Horario, "NR", prvm.UtilizadorId, null);
+            string dataString = prvm.Data + " " + prvm.Hora;
+            DateTime dataHora = DateTime.ParseExact(dataString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+            Reuniao reuniao = new Reuniao(dataHora, "NR", prvm.Motivo, prvm.UtilizadorId, null);
 
             _context.Reunioes.Add(reuniao);
             _context.SaveChanges();
@@ -27,6 +30,22 @@ namespace API_PDS.Services
             reuniao.Horario = rvm.Horario;
             reuniao.Ata = rvm.Ata;
             reuniao.GestorCondominioId = rvm.GestorCondominioId;
+
+            _context.SaveChanges();
+        }
+
+        public void AprovaPedidoReuniao(int id)
+        {
+            Reuniao reuniao = _context.Reunioes.FirstOrDefault(reuniao => reuniao.Id == id);
+            reuniao.Estado = "Aprovado";
+
+            _context.SaveChanges();
+        }
+
+        public void RejeitaPedidoReuniao(int id)
+        {
+            Reuniao reuniao = _context.Reunioes.FirstOrDefault(reuniao => reuniao.Id == id);
+            reuniao.Estado = "Rejeitado";
 
             _context.SaveChanges();
         }

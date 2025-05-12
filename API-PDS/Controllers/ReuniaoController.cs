@@ -30,6 +30,22 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        [HttpPost("aprovar/pedido/{id}")]
+        public IActionResult AprovarPedido(int id)
+        {
+            _reuniaoService.AprovaPedidoReuniao(id);
+
+            return Ok();
+        }
+
+        [HttpPost("rejeita/pedido/{id}")]
+        public IActionResult RejeitaPedido(int id)
+        {
+            _reuniaoService.RejeitaPedidoReuniao(id);
+
+            return Ok();
+        }
+
         [HttpGet("lista/admin")]
         public IActionResult ListaReunioesAdmin()
         {

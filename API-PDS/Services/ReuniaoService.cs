@@ -1,6 +1,7 @@
 ﻿using API_PDS.Model;
 using API_PDS.ViewModel;
 using System.Globalization;
+using System.Runtime.Intrinsics.Arm;
 
 namespace API_PDS.Services
 {
@@ -31,6 +32,13 @@ namespace API_PDS.Services
             reuniao.Ata = rvm.Ata;
             reuniao.GestorCondominioId = rvm.GestorCondominioId;
 
+            _context.SaveChanges();
+        }
+
+        public void AddAta(int id, string ata)
+        {
+            Reuniao reuniao = _context.Reunioes.FirstOrDefault(reuniao => reuniao.Id == id);
+            reuniao.Ata = ata;
             _context.SaveChanges();
         }
 

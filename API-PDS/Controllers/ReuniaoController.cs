@@ -46,6 +46,14 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        [HttpPost("add/ata/{id}")]
+        public IActionResult AddAta(int id, AddAtaViewModel ata)
+        {
+            _reuniaoService.AddAta(id, ata.ata);
+
+            return Ok();
+        }
+
         [HttpGet("lista/admin")]
         public IActionResult ListaReunioesAdmin()
         {

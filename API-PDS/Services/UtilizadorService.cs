@@ -76,7 +76,7 @@ namespace API_PDS.Services
         }
         public void AlterarPassword(int id, string password)
         {
-            Login login = _context.Login.FirstOrDefault(l => l.UtilizadorId == id && l.Password == password);
+            Login login = _context.Login.FirstOrDefault(l => l.UtilizadorId == id);
 
             login.Password = password;
             _context.SaveChanges();

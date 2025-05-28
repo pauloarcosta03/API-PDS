@@ -41,7 +41,7 @@ namespace API_PDS.Controllers
             return Ok(_utilizadorService.VerificarPassword(id, password));
         }
 
-        [HttpGet("altera/password/{id}/{passwordNova}")]
+        [HttpPost("altera/password/{id}/{passwordNova}")]
         public IActionResult AlterarPassword(int id, string passwordNova)
         {
             _utilizadorService.AlterarPassword(id, passwordNova);

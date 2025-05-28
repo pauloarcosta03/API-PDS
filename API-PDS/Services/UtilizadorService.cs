@@ -61,10 +61,20 @@ namespace API_PDS.Services
         {
             Utilizador utilizadorDb = _context.Utilizadores.FirstOrDefault(u => u.Id == euvm.Id);
             utilizadorDb.Nome = euvm.Nome;
-            utilizadorDb.Nif = euvm.Nif;
-            utilizadorDb.NPorta = euvm.NPorta;
             utilizadorDb.Foto = euvm.Foto;
+
+            Contacto contactoUser = _context.Contactos.FirstOrDefault(u => u.UtilizadorId == utilizadorDb.Id);
+            if (contactoUser == null) 
+                contactoUser.Descricao = euvm.Password;
+
+            utilizadorDb.Login.Password = euvm.Password;
+
             _context.SaveChanges();
+        }
+
+        public bool VerificarPassword(int id, string password)
+        {
+            return _context.Login.Any(l => l.UtilizadorId == id && l.Password == password);
         }
 
         public List<Utilizador> ObterTodos(int id)

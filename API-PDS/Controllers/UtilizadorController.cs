@@ -35,6 +35,13 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+        [HttpGet("verifica/password/{id}/{password}")]
+        public IActionResult ObterTodos(int id, string password)
+        {
+            List<Utilizador> utilizadores = _utilizadorService.ObterTodos(id);
+            return Ok(utilizadores);
+        }
+
         [HttpGet("todos/{id}")]
         public IActionResult ObterTodos(int id)
         {

@@ -52,8 +52,7 @@ namespace API_PDS.Controllers
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
-            Utilizador utilizador = _utilizadorService.ObterPorId(id);
-            return Ok(utilizador);
+            return Ok(_utilizadorService.ObterPorId(id));
         }
     }
 }

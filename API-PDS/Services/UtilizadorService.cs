@@ -73,6 +73,8 @@ namespace API_PDS.Services
             _context.SaveChanges();
         }
 
+
+
         public bool VerificarPassword(int id, string password)
         {
             return _context.Login.Any(l => l.UtilizadorId == id && l.Password == password);
@@ -88,9 +90,18 @@ namespace API_PDS.Services
                 .ToList();
         }
 
-        public Utilizador ObterPorId(int id)
+        public EditarUserViewModel ObterPorId(int id)
         {
-            return _context.Utilizadores.FirstOrDefault(u => u.Id == id);
+            Utilizador u = _context.Utilizadores.FirstOrDefault(u => u.Id == id);
+
+            EditarUserViewModel euvm = new EditarUserViewModel();
+            euvm.Id = u.Id;
+            euvm.Nome = u.Nome;
+            euvm.Foto = u.Foto;
+            euvm.Telemovel = _context.Contactos.FirstOrDefault(c => c.UtilizadorId == u.Id).Descricao;
+            euvm.Password = "";
+
+            return euvm;
         }
     }
 }

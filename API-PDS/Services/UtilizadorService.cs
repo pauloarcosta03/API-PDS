@@ -67,17 +67,20 @@ namespace API_PDS.Services
             if (contactoUser == null) 
                 contactoUser.Descricao = euvm.Telemovel;
 
-            if (euvm.Password != null && euvm.Password != "")
-                utilizadorDb.Login.Password = euvm.Password;
-
             _context.SaveChanges();
         }
-
-
 
         public bool VerificarPassword(int id, string password)
         {
             return _context.Login.Any(l => l.UtilizadorId == id && l.Password == password);
+        }
+        public void AlterarPassword(int id, string password)
+        {
+            Login login = _context.Login.FirstOrDefault(l => l.UtilizadorId == id && l.Password == password);
+
+            login.Password = password;
+            _context.SaveChanges();
+
         }
 
         public List<Utilizador> ObterTodos(int id)
@@ -99,7 +102,6 @@ namespace API_PDS.Services
             euvm.Nome = u.Nome;
             euvm.Foto = u.Foto;
             euvm.Telemovel = _context.Contactos.FirstOrDefault(c => c.UtilizadorId == u.Id).Descricao;
-            euvm.Password = "";
 
             return euvm;
         }

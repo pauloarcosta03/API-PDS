@@ -6,6 +6,5 @@
         public string Nome { get; set; }
         public string Foto { get; set; }
         public string Telemovel { get; set; }
-        public string Password { get; set; }
     }
 }

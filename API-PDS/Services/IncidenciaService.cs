@@ -37,6 +37,10 @@ namespace API_PDS.Services
             return _context.Incidencias.Where(i => i.Resposta == null && i.CondominioId == condominioId).ToList();
         }
 
+        public List<Incidencia> ListaIncidenciasUtilizador(int utilizadorId) {
+            return _context.Incidencias.Where(i => i.UtilizadorId == utilizadorId).ToList();
+        }
+
         public Incidencia IncidenciaId(int id) {
             return _context.Incidencias.FirstOrDefault(i => i.Id == id);
         }

@@ -44,5 +44,12 @@ namespace API_PDS.Controllers
             return Ok(_incidenciaService.ListaIncidencias(condominioId));
         }
 
+        [HttpGet("lista/user/{utilizadorId}")]
+        public IActionResult ListaIncidenciasUtilizador(int utilizadorId)
+        {
+
+            return Ok(_incidenciaService.ListaIncidenciasUtilizador(utilizadorId));
+        }
+
     }
 }

@@ -65,7 +65,7 @@ namespace API_PDS.Services
 
         public List<Reuniao> ListaReunioesFuturas()
         {
-            return _context.Reunioes.Where(r => r.Horario >= DateTime.Now && r.Estado == "Aprovado").ToList();
+            return _context.Reunioes.Where(r => r.Estado == "Aprovado").OrderBy(r => r.Horario).ToList();
         }
     }
 }

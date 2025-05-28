@@ -21,6 +21,18 @@ namespace API_PDS.Services
             _context.SaveChanges();
         }
 
+        public void EliminarPost(int id)
+        {
+            var post = _context.Post.FirstOrDefault(p => p.Id == id);
+
+            if (post != null)
+            {
+                _context.Remove(post);
+                _context.SaveChanges();
+            }
+        }
+
+
         public void AddLike(int utilizadorId, int postId)
         {
             Like like = new Like(utilizadorId, postId);

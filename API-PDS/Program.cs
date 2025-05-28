@@ -16,7 +16,7 @@ builder.Services.AddScoped<ReuniaoService>();
 // Add services to the container.
 builder.Services.AddDbContext<CondoSocialContext>(options =>
 {
-    options.UseSqlServer("Server=PC-PAULO;Database=CondoSocialDB;Trusted_Connection=True;TrustServerCertificate=True;");
+    options.UseSqlServer("Server=DESKTOP-GU82V0L;Database=CondoSocialDB;Trusted_Connection=True;TrustServerCertificate=True;");
 });
 
 builder.Services.AddControllers();

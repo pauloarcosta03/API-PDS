@@ -30,6 +30,16 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
+
+
+        [HttpPost("eliminar/{id}")]
+        public IActionResult Eliminar(int id)
+        {
+            _postService.EliminarPost(id);
+
+            return Ok();
+        }
+
         [HttpPost("like/{utilizadorId}/{postId}")]
         public IActionResult Like(int utilizadorId, int postId)
         {

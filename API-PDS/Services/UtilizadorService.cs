@@ -65,7 +65,7 @@ namespace API_PDS.Services
 
             Contacto contactoUser = _context.Contactos.FirstOrDefault(u => u.UtilizadorId == utilizadorDb.Id);
             if (contactoUser == null) 
-                contactoUser.Descricao = euvm.Password;
+                contactoUser.Descricao = euvm.Telemovel;
 
             utilizadorDb.Login.Password = euvm.Password;
 

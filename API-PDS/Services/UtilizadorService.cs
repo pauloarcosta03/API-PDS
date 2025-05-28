@@ -67,7 +67,8 @@ namespace API_PDS.Services
             if (contactoUser == null) 
                 contactoUser.Descricao = euvm.Telemovel;
 
-            utilizadorDb.Login.Password = euvm.Password;
+            if (euvm.Password != null && euvm.Password != "")
+                utilizadorDb.Login.Password = euvm.Password;
 
             _context.SaveChanges();
         }

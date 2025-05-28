@@ -30,8 +30,6 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
-
-
         [HttpPost("eliminar/{id}")]
         public IActionResult Eliminar(int id)
         {

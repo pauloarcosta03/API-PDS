@@ -36,13 +36,12 @@ namespace API_PDS.Model
         {
             
         }
-        public Utilizador(string Nome, int Nif, int NPorta, int CondominioId, int? GestorCondominioId, int? LoginId)
+        public Utilizador(string Nome, int Nif, int NPorta, int CondominioId, int? LoginId)
         {
             this.Nome = Nome;
             this.Nif = Nif;
             this.NPorta = NPorta;
             this.CondominioId = CondominioId;
-            this.GestorCondominioId = GestorCondominioId;
             this.LoginId = LoginId;
         }
 

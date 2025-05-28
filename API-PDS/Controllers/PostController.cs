@@ -30,7 +30,7 @@ namespace API_PDS.Controllers
             return Ok();
         }
 
-        [HttpPost("eliminar/{id}")]
+        [HttpDelete("eliminar/{id}")]
         public IActionResult Eliminar(int id)
         {
             _postService.EliminarPost(id);

@@ -3,6 +3,7 @@
     public class EditarUserViewModel
     {
         public int Id { get; set; }
+        public int? CondominioId { get; set; }
         public string Nome { get; set; }
         public string Foto { get; set; }
         public string Telemovel { get; set; }

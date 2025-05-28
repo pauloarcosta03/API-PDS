@@ -104,6 +104,7 @@ namespace API_PDS.Services
             euvm.Nome = u.Nome;
             euvm.Foto = u.Foto;
             euvm.Telemovel = _context.Contactos.FirstOrDefault(c => c.UtilizadorId == u.Id).Descricao;
+            euvm.CondominioId = u.CondominioId;
 
             return euvm;
         }
